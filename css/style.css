@@ -4,6 +4,15 @@ body {
     height: 100vh;
 }
 
+@font-face {
+    font-family: 'Open Sans';
+    src:
+        url(../fonts/open-sans/open-sans-v29-latin-300.woff2),
+        url(../fonts/open-sans/open-sans-v29-latin-700.woff2),
+        url(../fonts/open-sans/open-sans-v29-latin-regular.woff2);
+    font-display: fallback;
+}
+
 header h1 {
     font-size: 40px;
     color: rgb(240 216 2);
