@@ -292,6 +292,7 @@ function renderDamage(damage, idName) {
 }
 
 // ============== show and close Poke Cards ==============
+
 let cardBoolen = false;
 
 function showPokoCard(i) {
@@ -354,8 +355,8 @@ function morePokeCards() {
     renderPokeDeck();
 }
 
-
 // ============== navigation menu ==============
+
 let navBarBoolen = false;
 
 function navBar() {
@@ -437,114 +438,3 @@ function hideMenu() {
     document.getElementById('menu').classList.toggle('d-none');
     document.getElementById('barImg').classList.toggle('barImg');
 }
-
-
-
-
-
-
-
-// window.onscroll = function () {
-//     let scroll = Math.trunc(window.scrollY);
-
-//     // if (scroll > 100) {
-//     //     pokeDeck += 12;
-//     // }
-
-//     console.log("bottom!");
-// }
-
-// window.onscroll = function () {
-//     if (window.scrollY + window.innerHeight >= document.body.clientHeight) {
-//         console.log("bottom!");
-//     }
-// } 
-
-
-
-
-// async function go(id) {
-//     await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-//         .then((res) => res.json())
-//         .then((data) => {
-//             fetch(data.species.url)
-//                 .then((res) => res.json())
-//                 .then((specie) => {
-//                     fetch(specie.evolution_chain.url)
-//                         .then((res) => res.json())
-//                         .then((evo) => {
-//                             console.log('1 ' + evo.chain.species.name);
-//                             if (evo.chain.evolves_to[0]) {
-//                                 console.log('2 ' +
-//                                     evo.chain.evolves_to.map((entry) => entry.species.name)
-//                                 );
-//                             }
-//                             if (evo.chain.evolves_to[0].evolves_to[0]) {
-//                                 console.log('3 ' +
-//                                     evo.chain.evolves_to[0].evolves_to.map(
-//                                         (entry) => entry.species.name
-//                                     )
-//                                 );
-//                             }
-//                         });
-//                 });
-//         });
-// }
-
-// async function go2(id) {
-//     await fetch(`pokeapi.co/api/v2/pokemon-species/${id}/`)
-//         .then((res) => res.json())
-//         .then((specie) => {
-//             fetch(specie.evolution_chain.url)
-//                 .then((res) => res.json())
-//                 .then((evo) => {
-//                     console.log('1 ' + evo.chain.species.name);
-//                     if (evo.chain.evolves_to[0]) {
-//                         console.log('2 ' +
-//                             evo.chain.evolves_to.map((entry) => entry.species.name)
-//                         );
-//                     }
-//                     if (evo.chain.evolves_to[0].evolves_to[0]) {
-//                         console.log('3 ' +
-//                             evo.chain.evolves_to[0].evolves_to.map(
-//                                 (entry) => entry.species.name
-//                             )
-//                         );
-//                     }
-//                 });
-//         });
-// }
-
-
-
-// async function searchEvolutionPoke(id) {
-//     // console.log(id)
-//     evolutionNameArray = [];
-//     await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-//         .then((res) => res.json())
-//         .then((data) => {
-//             pokeId = data.id;
-//             pokeName = data.name;
-//             // console.log(data.name);
-//             fetch(data.species.url)
-//                 .then((res) => res.json())
-//                 .then((specie) => {
-//                     fetch(specie.evolution_chain.url)
-//                         .then((res) => res.json())
-//                         .then((evo) => {
-//                             // console.log('1 ' + evo.chain.species.name);
-//                             evolutionNameArray.push(evo.chain.species.name);
-//                             if (evo.chain.evolves_to[0]) {
-//                                 console.log('2 ' + evo.chain.evolves_to.map((entry) => entry.species.name));
-//                                 evolutionNameArray.push(evo.chain.evolves_to[0].species.name);
-//                             }
-//                             if (evo.chain.evolves_to[0].evolves_to[0]) {
-//                                 // console.log('3 ' + evo.chain.evolves_to[0].evolves_to.map((entry) => entry.species.name));
-//                                 evolutionNameArray.push(evo.chain.evolves_to[0].evolves_to[0].species.name);
-//                             }
-//                         });
-//                 });
-//         });
-// }
-
-
