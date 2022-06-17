@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./js/script.js"></script>
+    <script src="./js/templates.js"></script>
+</head>
+
+<body onload="renderPokeDeck(); includeHTML()" id="body">
+
+    <!-- navigation navBar -->
+
+    <div class="navBar">
+        <img class="navBarImg" id="barImg" onclick="navBar()" src="./img/Menu.svg">
+        <div class="menu d-none" id="menu">
+            <button class="lawButton" id="law_0" onclick="imprint()">Impressum</button>
+            <button class="lawButton" id="law_1" onclick="privacy()">Datenschutz</button>
+            <button class="lawButton" id="law_2" onclick="copyright()">Copyright</button>
+        </div>
+        <div class="backNavBar d-none" id="backNavBar" onclick="backNavBar()"></div>
+        <div class="back d-none" id="back" onclick="back()"><img class="backImg" src="./img/close.svg"></div>
+    </div>
+
+    <!-- page Laws -->
+
+    <div class="pageLaws d-none" id="pageLaws">
+        <div class="law d-none" id="imprint">
+            <div class="lowContent" w3-include-html="./templates/imprint.html"></div>
+        </div>
+        <div class="law d-none" id="privacy">
+            <div class="lowContent" w3-include-html="./templates/privacy.html"></div>
+        </div>
+        <div class="law d-none" id="copyright">
+            <div class="lowContent" w3-include-html="./templates/copyright.html"></div>
+        </div>
+    </div>
+
+    <!-- jump window top -->
+
+    <div class="arrowUp" id="arrowUp">
+        <a onclick="arrowUp()" href="#"><img src="./img/arrowUp.svg" alt="arrowUp"></a>
+    </div>
+
+    <!-- header -->
+
+    <header>
+        <h1>Pokemon</h1>
+        <div class="searchContainer">
+            <img src="./img/search.svg">
+            <input type="text" class="searchPoke" id="searchPoke" onkeyup="searchPoke()" placeholder="Pokemon suchen.">
+            <div class="outputSearchPoke" id="outputSearchPoke"></div>
+        </div>
+    </header>
+
+    <!-- Poke Deck -->
+
+    <div class="card d-none" id="card"></div>
+    <div class="cardDeck" id="cardDeck"></div>
+
+    <div class="buttonContainer">
+        <button onclick="morePokeCards()">Mehr Anzeigen</button>
+    </div>
+
+</body>
+
+</html>
