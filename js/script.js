@@ -17,6 +17,11 @@ let newPokeID = 0;
 
 // ============== API ==============
 
+async function loadPoceJson() {
+    let responseJson = await fetch('./json/poke.json');
+    pokeJson = await responseJson.json();
+}
+
 async function loadPokeApi(i) {
 
     let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
@@ -44,29 +49,69 @@ async function loadEvolutionPokeApi() {
 
 // ============== render Poke Deck ==============
 
+// let arrayEN = [[],[],[],[]];
+
+// async function renderPokeDeck() {
+//     console.log('ok')
+//     for (let i = 0; i < 898; i++) {
+//         await loadPokeApi(i);
+
+//         arrayEN[0].push(pokeCards.id);
+//         arrayEN[1].push(pokeCardsSpecies.color.name);
+//         arrayEN[2].push(pokeCardsSpecies.names[8].name);
+//         arrayEN[3].push(pokeCardsSpecies.names[5].name);
+//     }
+
+//     export2txt(arrayEN);
+// }
+// function export2txt(originalData) {
+//     const a = document.createElement("a");
+//     a.href = URL.createObjectURL(new Blob([JSON.stringify(originalData, null, 2)], {
+//         type: "text/plain"
+//     }));
+//     a.setAttribute("download", "data.json");
+//     document.body.appendChild(a);
+//     a.click();
+//     document.body.removeChild(a);
+// }
+
+
+let alternateImage;
+
+function missingPicture() {
+    alternateImage = pokeCards.sprites.other.dream_world.front_default;
+    let picturePvg = pokeCards.sprites.other['official-artwork'].front_default;
+
+    if (!alternateImage) {
+        alternateImage = picturePvg;
+    }
+}
+
+
 async function renderPokeDeck() {
 
     for (let i = minNum; i < pokeDeck; i++) {
         await loadPokeApi(i);
 
         calculatePokeID();
+        missingPicture();
 
         document.getElementById('cardDeck').innerHTML +=
             `
             <div class="pokeContainerDeck ${pokeCardsSpecies.color.name}" style="border: 1px solid ${pokeCardsSpecies.color.name}" onclick="showPokoCard(${i})">
                 <div class="pokeHeadDeck">
                     <div class="pokeTitleDeck">
-                        <h3 class="color_${pokeCardsSpecies.color.name}">${pokeCardsSpecies.names[5].name}</h3>
+                        <h3 class="color_${pokeCardsSpecies.color.name}">${pokeCardsSpecies.names[8].name}</h3>
                         <span>${pokeCardsSpecies.genera[7].genus}</span>
                     </div>
-                    <h2 class="pokeIdDeck color_${pokeCardsSpecies.color.name}">${newPokeID}</h2>
+                    <h2 class="pokeIdDeck color_${pokeCardsSpecies.color.name}">#${newPokeID}</h2>
                 </div>
                 <div class="pokeImgContainer">
                     <div class="typeMainDeck" id="typeMainDeck_${i}">
                         <div><img class="typeImg" src="./img/${pokeCards.types[0].type.name}.svg"></div>
                         
                     </div>
-                    <img class="pokeImgDeck" src="${pokeCards.sprites.other.dream_world.front_default}">
+                    <img class="pokeImgDeck" src="${alternateImage}">
                 </div>
             </div>
             `;
@@ -77,9 +122,14 @@ async function renderPokeDeck() {
 
 function calculatePokeID() {
     newPokeID = pokeCards.id;
-    if (pokeCards.id.toString().length > 0) { newPokeID = '#00' + newPokeID.toString() };
-    if (pokeCards.id.toString().length > 1) { newPokeID = '#0' + pokeCards.id.toString() };
+    if (pokeCards.id.toString().length == 1) { newPokeID = '00' + newPokeID.toString() };
+    if (pokeCards.id.toString().length == 2) { newPokeID = '0' + pokeCards.id.toString() };
 }
+// function loadAddZero(idNum) {
+//     addZero = idNum;
+//     if (idNum.toString().length == 1) { addZero = '00' + addZero.toString() };
+//     if (idNum.toString().length == 2) { addZero = '0' + idNum.toString() };
+// }
 
 function typeMainDeck(i) {
     document.getElementById('typeMainDeck_' + i).innerHTML +=
@@ -94,6 +144,7 @@ async function renderPokeCard(i) {
     await loadPokeApi(i);
 
     calculatePokeID();
+    missingPicture();
 
     let gender;
     if (pokeCardsSpecies.gender_rate == 0) { gender = 'female' };
@@ -106,12 +157,12 @@ async function renderPokeCard(i) {
             <div class="pokeHeader">
                 <div class="pokeHead">
                     <div class="pokeTitle" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
-                        <h3 class="color_${pokeCardsSpecies.color.name}">${pokeCardsSpecies.names[5].name}</h3>
+                        <h3 class="color_${pokeCardsSpecies.color.name}">${pokeCardsSpecies.names[8].name}</h3>
                         <span>${pokeCardsSpecies.genera[7].genus}</span>
                     </div>
-                    <h2 class="pokeID color_${pokeCardsSpecies.color.name}">${newPokeID}</h2>
+                    <h2 class="pokeID color_${pokeCardsSpecies.color.name}">#${newPokeID}</h2>
                 </div>
-                <img class="pokeImg" src="${pokeCards.sprites.other.dream_world.front_default}">
+                <img class="pokeImg" src="${alternateImage}">
             </div>
             <div class="descriptionPoke" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Flavor</h4>
@@ -120,7 +171,7 @@ async function renderPokeCard(i) {
             <div class="pokeType" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Type</h4>
                 <div class="typeMain" id="typeMain_${i}">
-                    <div class="${pokeCards.types[0].type.name}"><img class="typeImg" src="./img/${pokeCards.types[0].type.name}.svg">${pokeCards.types[0].type.name}</div>
+                    <div class="${pokeCards.types[0].type.name}" style="box-shadow: 0px 0px 2px 0px #000000"><img class="typeImg" src="./img/${pokeCards.types[0].type.name}.svg">${pokeCards.types[0].type.name}</div>
                 </div>
             </div>
 
@@ -191,7 +242,7 @@ async function renderPokeCard(i) {
 function typeMain(i) {
     document.getElementById('typeMain_' + i).innerHTML +=
         `
-        <div class="${pokeCards.types[1].type.name}"><img class="typeImg" src="./img/${pokeCards.types[1].type.name}.svg">${pokeCards.types[1].type.name}</div>
+        <div class="${pokeCards.types[1].type.name}" style="box-shadow: 0px 0px 2px 0px #000000"><img class="typeImg" src="./img/${pokeCards.types[1].type.name}.svg">${pokeCards.types[1].type.name}</div>
         `;
 }
 
@@ -221,17 +272,20 @@ async function developmentsPoke(idNr) {
     evolutionNameArray = [];
     evolutionPicsArray = [];
 
-    pokeName = pokeCards.name;
-    evolutionNameArray.push(pokeCardsEvolves.chain.species.name);
-    evolutionPicsArray.push(idNr);
+    if (pokeCardsEvolves.chain) {
+        pokeName = pokeCards.name;
+        evolutionNameArray.push(pokeCardsEvolves.chain.species.name);
+        evolutionPicsArray.push(idNr);
 
-    if (pokeCardsEvolves.chain.evolves_to[0]) {
-        evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].species.name);
-        evolutionPicsArray.push(idNr + 1);
-    }
-    if (pokeCardsEvolves.chain.evolves_to[0].evolves_to[0]) {
-        evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name);
-        evolutionPicsArray.push(idNr + 2);
+        if (pokeCardsEvolves.chain.evolves_to[0]) {
+            evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].species.name);
+            evolutionPicsArray.push(idNr + 1);
+
+            if (pokeCardsEvolves.chain.evolves_to[0].evolves_to[0]) {
+                evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name);
+                evolutionPicsArray.push(idNr + 2);
+            }
+        }
     }
 
     sortEvolutionPoke(idNr);
@@ -255,7 +309,7 @@ async function pushEvolutionPoke(idNr) {
 
         document.getElementById('developmentsPoke_' + idNr).innerHTML +=
             `
-        <div class="pokoChain">
+        <div class="pokoChain" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name};">
             <img src="${pokeCards.sprites.other.dream_world.front_default}">
             <h5>${evolutionNameArray[i]}</h5>
         </div>
@@ -283,7 +337,7 @@ function renderDamage(damage, idName) {
 
         document.getElementById(idName).innerHTML +=
             `
-                <div class="damageBox ${damage[i].name}">
+                <div class="damageBox ${damage[i].name}" style="box-shadow: 0px 0px 2px 0px #000000">
                     <img class="typeImg" src="./img/${damage[i].name}.svg">
                     <h5>${damage[i].name}</h5>
                 </div>
@@ -314,40 +368,42 @@ function closePokoCard() {
 
 // ============== search Poke Cards ==============
 
-async function searchPoke() {
-    let search = document.getElementById('searchPoke').value;
-    search = search.toLowerCase();
+// async function searchPoke() {
+//     let search = document.getElementById('searchPoke').value;
+//     search = search.toLowerCase();
 
-    let list = document.getElementById('outputSearchPoke');
-    list.innerHTML = '';
+//     let list = document.getElementById('outputSearchPoke');
+//     list.innerHTML = '';
 
-    for (let i = 0; i < pokeDeck; i++) {
-        await loadPokeApi(i);
-        let currentPoke = pokeCardsSpecies.names[5].name.toLowerCase();
+// // console.log(pokeCardsSpecies.length )
 
-        if (currentPoke.toLowerCase().includes(search) && search.length > 0) {
-            list.innerHTML +=
-                `
-                <ul onclick="showPokoCard(${i})">
-                    <a onclick="closeSearch()" class="color_${pokeCardsSpecies.color.name}" href="#">${currentPoke}</a>
-                    <img class="pokeImgSearch" src="${pokeCards.sprites.other.dream_world.front_default}">
-                </ul>
-                `;
-        }
+//     for (let i = 0; i < 200; i++) {
+//         await loadPokeApi(i);
+//         let currentPoke = pokeCardsSpecies.names[5].name.toLowerCase();
 
-        if (search.length < 0) {
-            document.getElementById('outputSearchPoke').innerHTML = '';
-            document.getElementById('searchPoke').value = '';
-        }
-    };
-}
+//         if (currentPoke.toLowerCase().charAt().includes(search) && search.length > 0) {
+//             list.innerHTML +=
+//                 `
+//                 <ul onclick="showPokoCard(${i})">
+//                     <a onclick="closeSearch()" class="color_${pokeCardsSpecies.color.name}" href="#">${currentPoke}</a>
+//                     <img class="pokeImgSearch" src="${pokeCards.sprites.other.dream_world.front_default}">
+//                 </ul>
+//                 `;
+//         }
+
+//         if (search.length < 0) {
+//             document.getElementById('outputSearchPoke').innerHTML = '';
+//             document.getElementById('searchPoke').value = '';
+//         }
+//     };
+// }
 
 function closeSearch() {
     document.getElementById('outputSearchPoke').innerHTML = '';
     document.getElementById('searchPoke').value = '';
 }
 
-// ============== add 20 Poke Cards ==============
+// // ============== add 20 Poke Cards ==============
 
 function morePokeCards() {
     minNum = pokeDeck;

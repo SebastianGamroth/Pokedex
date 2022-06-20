@@ -2,6 +2,7 @@ body {
     margin: 0px;
     font-family: 'Open Sans';
     height: 100vh;
+    scroll-behavior: smooth;
 }
 
 @font-face {
@@ -653,7 +654,7 @@ button:hover {
 .outputSearchPoke {
     z-index: 1;
     position: absolute;
-    top: 26px;
+    top: 37px;
     left: 0px;
     right: 0px;
 }
@@ -683,7 +684,7 @@ button:hover {
 
 .outputSearchPoke ul a {
     text-decoration: none;
-    color: rgb(21, 21, 21);
+    /* color: rgb(21, 21, 21); */
 }
 
 /* navigation bar */
