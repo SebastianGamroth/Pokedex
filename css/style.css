@@ -28,9 +28,9 @@ header h1 {
 
 h4 {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     margin: 6px;
-    color: #2e2e2e;
+    color: #4b4b4b;;
 }
 
 h3 {
@@ -42,6 +42,7 @@ h5 {
     font-weight: 300;
     margin: 6px;
     text-align: right;
+    color: #1f1f1f;
 }
 
 span {
@@ -84,6 +85,10 @@ span {
     background-color: #ffdae0;
 }
 
+.gray {
+    background-color: #cbcbcb;
+}
+
 /* color TextTitle */
 .color_green {
     color: #3c893f;
@@ -115,6 +120,14 @@ span {
 
 .color_purple {
     color: purple;
+}
+
+.color_pink {
+    color: rgb(170, 85, 99);
+}
+
+.color_gray {
+    color: rgb(63, 63, 63);
 }
 
 /* color Icons */
@@ -333,6 +346,8 @@ header {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    color: white;
+    font-weight: 600;
 }
 
 .typeMain div {
@@ -369,6 +384,8 @@ header {
 
 .statsContainer h4 {
     width: 90px;
+    color: #1f1f1f;
+    font-weight: 500;
 }
 
 .progressContainer {
