@@ -1,8 +1,11 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0px;
     font-family: 'Open Sans';
     height: 100vh;
-    scroll-behavior: smooth;
 }
 
 @font-face {
