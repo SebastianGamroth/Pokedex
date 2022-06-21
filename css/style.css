@@ -30,7 +30,8 @@ h4 {
     font-size: 16px;
     font-weight: 600;
     margin: 6px;
-    color: #4b4b4b;;
+    color: #4b4b4b;
+    ;
 }
 
 h3 {
@@ -592,16 +593,70 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(172 179 221 / 43%);
+    background-color: rgb(172 179 221 / 65%);
 }
 
 .pokeCardContainer {
-    position: absolute;
+    z-index: 1;
     max-width: 460px;
-    max-height: 400px;
+    max-height: 420px;
     border-radius: 16px;
-    cursor: pointer;
     padding: 6px;
+}
+
+.box {
+    position: absolute;
+    width: 600px;
+    height: 434px;
+}
+
+.arrowleft,
+.arrowRight {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    opacity: 1;
+}
+
+.arrowleft img,
+.arrowRight img {
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+    background-color: #d1d1d1;
+    border-radius: 50px;
+}
+
+.arrowleft img:hover,
+.arrowRight img:hover {
+    border-radius: 50px;
+    background-color: #ededed;
+}
+
+.arrowleft {
+    left: 0px;
+}
+
+.arrowRight {
+    transform: scale(-1);
+    right: 0px;
+}
+
+.closeCardofPoke {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 12px;
+    right: 0px;
+    opacity: 1;
+    cursor: pointer;
+    background-color: #d1d1d1;
+    border-radius: 50px;
+}
+
+.closeCardofPoke:hover {
+    background-color: #ededed;
 }
 
 .cardOverflow {
@@ -896,11 +951,47 @@ button:hover {
     display: none;
 }
 
+@media (max-width: 620px) {
+    .box {
+        width: 460px;
+    }
+
+    .arrowleft,
+    .arrowRight {
+        z-index: 2;
+        margin: 6px;
+    }
+
+    .arrowleft img,
+    .arrowRight img {
+        background-color: rgba(255, 255, 255, 0);
+        opacity: 0.5;
+    }
+
+    .closeCardofPoke {
+        z-index: 2;
+        margin: 6px;
+        background-color: rgba(255, 255, 255, 0);
+        opacity: 0.5;
+    }
+
+    .arrowleft img:hover,
+    .arrowRight img:hover,
+    .closeCardofPoke:hover {
+        background-color: rgba(255, 255, 255, 0.281);
+        opacity: 0.9;
+    }
+}
+
 @media (max-width: 480px) {
     .pokeCardContainer {
         max-height: 100vh;
         margin: 3px;
         top: 0px;
         bottom: 0px;
+    }
+
+    .box {
+        width: 100%;
     }
 }

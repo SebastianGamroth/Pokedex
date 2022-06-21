@@ -89,7 +89,6 @@ function missingPicture() {
 
 
 async function renderPokeDeck() {
-
     for (let i = minNum; i < pokeDeck; i++) {
         await loadPokeApi(i);
 
@@ -153,7 +152,15 @@ async function renderPokeCard(i) {
 
     document.getElementById('card').innerHTML =
         `
-        <div class="pokeCardContainer cardOverflow ${pokeCardsSpecies.color.name}" style="border: 1px solid ${pokeCardsSpecies.color.name}" id="pokeContainer" onclick="closePokoCard()">
+        <div class="box">
+               <div class="arrowleft"><img id="returnPoco" onclick="nextCardofPoke(0,${i})" src="./img/arrowLeftRight.svg"></div>
+               <div class="arrowRight"><img id="nextPoco" onclick="nextCardofPoke(1,${i})" src="./img/arrowLeftRight.svg"></div>
+               <img class="closeCardofPoke" onclick="closePokoCard()" src="./img/close.svg">
+           
+        </div>
+
+        <div class="pokeCardContainer cardOverflow ${pokeCardsSpecies.color.name}" style="border: 1px solid ${pokeCardsSpecies.color.name}" id="pokeContainer">
+            
             <div class="pokeHeader">
                 <div class="pokeHead">
                     <div class="pokeTitle" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
@@ -230,9 +237,12 @@ async function renderPokeCard(i) {
                     <h5>${pokeCards.weight / 10} kg</h5>
                 </div>
             </div>
-        </div>
-    `;
 
+        </div>
+        `;
+
+    if (i == 0) { document.getElementById('returnPoco').style.display = ('none'); }
+    if (i == 899) { document.getElementById('nextPoco').style.display = ('none'); }
     if (pokeCards.types.length > 1) { typeMain(i); }
     baseStatsPoke(i);
     developmentsPoke(i);
@@ -364,6 +374,19 @@ function closePokoCard() {
     document.getElementById('card').classList.add('d-none')
     closeSearch();
     cardBoolen = false;
+}
+
+// ============== next Poke Cards ==============
+
+function nextCardofPoke(id, i) {
+    if (id == 0) {
+        closePokoCard();
+        showPokoCard(i - 1);
+    }
+    if (id == 1) {
+        closePokoCard();
+        showPokoCard(i + 1);
+    }
 }
 
 // ============== search Poke Cards ==============
