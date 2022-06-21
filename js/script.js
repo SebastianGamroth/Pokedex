@@ -345,7 +345,7 @@ function renderDevelopments(i) {
 
 // ============== render all Display none ==============
 
-function renderInfo(i){
+function renderInfo(i) {
     document.getElementById('pokeType_' + i).style.display = 'flex';
     document.getElementById('pokeStrength_' + i).style.display = 'flex';
     document.getElementById('pokeWeakness_' + i).style.display = 'flex';
@@ -364,7 +364,7 @@ function renderInfo(i){
 
 // ============== render all Display none ==============
 
-function renderDisplayNone(i){
+function renderDisplayNone(i) {
 
 }
 
@@ -558,20 +558,26 @@ function back() {
     toggleRegulations('imprint', 'privacy', 'copyright');
 }
 
-// ============== jump window top ==============
+// ============== jump to top window ==============
+// ============== reload more Poke automatically ==============
 
 function arrowUp() {
     window.scrollTo(0, 0);
 }
 
 window.onscroll = function () {
-    let scroll = Math.trunc(window.scrollY);
+    let scrollY = Math.trunc(window.scrollY);
 
-    if (scroll < 120) {
+    if (scrollY < 120) {
         document.getElementById('arrowUp').style.display = 'none';
     }
-    if (scroll > 120) {
+
+    if (scrollY > 120) {
         document.getElementById('arrowUp').style.display = 'flex';;
+    }
+
+    if (scrollY + window.innerHeight + 1 >= document.body.clientHeight) {
+        morePokeCards();
     }
 }
 

@@ -5,7 +5,7 @@ html {
 body {
     margin: 0px;
     font-family: 'Open Sans';
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 @font-face {
@@ -732,30 +732,30 @@ h3 {
 }
 
 /* button */
-.buttonContainer {
+/* .buttonContainer {
     display: flex;
     justify-content: center;
     margin-top: 16px;
     padding-bottom: 16px;
-}
+} */
 
-.buttonContainer button {
+/* .buttonContainer button { */
     /* border: 1px solid rgb(111, 111, 111);
     border-radius: 6px;
     padding: 6px 24px; */
 
-    color: rgb(240 216 2);
+    /* color: rgb(240 216 2);
     font-size: 16px;
     background-color: #d7d706;
     text-shadow: 1px 1px 1px rgb(8 36 228), 1px -1px 1px rgb(8 36 228), -1px 1px 1px rgb(8 36 228), -1px -1px 1px rgb(8 36 228);
     border: 1px solid rgb(8 36 228);
     border-radius: 6px;
     padding: 6px 24px;
-}
+} */
 
-button:hover {
+/* button:hover {
     background-color: #c3c30e;
-}
+} */
 
 /* search Poke */
 .searchContainer {
