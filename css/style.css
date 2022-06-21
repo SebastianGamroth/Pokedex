@@ -334,13 +334,14 @@ header {
 /* ---------------------- */
 
 .pokeType {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     background-color: #ffffff7a;
     border-radius: 6px;
     padding: 6px;
     margin-bottom: 6px;
+    height: 100%;
 }
 
 .typeMain {
@@ -365,12 +366,14 @@ header {
 /* ---------------------- */
 
 .baseStatsPoke {
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     background-color: #ffffff7a;
     border-radius: 6px;
     padding: 6px;
     margin-bottom: 6px;
+    height: calc(100% - 64px);
 }
 
 .statsContainer {
@@ -447,13 +450,14 @@ header {
 /* ---------------------- */
 
 .pokeDevelopments {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     background-color: #ffffff7a;
     border-radius: 6px;
     padding: 6px;
     margin-bottom: 6px;
+    height: 100%;
 }
 
 .developmentsImg {
@@ -482,7 +486,7 @@ header {
 /* ---------------------- */
 
 .pokeBreeding {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -511,7 +515,7 @@ header {
 /* ---------------------- */
 .pokeStrength,
 .pokeWeakness {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -519,6 +523,7 @@ header {
     border-radius: 6px;
     padding: 6px;
     margin-bottom: 6px;
+    height: 100%;
 }
 
 .damageContainer {
@@ -545,7 +550,7 @@ header {
 /* ---------------------- */
 
 .pokeBodyMass {
-    display: flex;
+    display: none;
     justify-content: space-between;
     background-color: #ffffff7a;
     border-radius: 6px;
@@ -594,15 +599,66 @@ h3 {
     justify-content: center;
     align-items: center;
     background-color: rgb(172 179 221 / 65%);
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .pokeCardContainer {
     z-index: 1;
     max-width: 460px;
-    max-height: 420px;
+    max-height: 454px;
+    width: 100%;
+    height: 100%;
     border-radius: 16px;
     padding: 6px;
+    /* padding: 0px 6px 6px 6px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
+
+.headerNavitagion {
+    position: sticky;
+    top: 0px;
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.first,
+.second,
+.third,
+.fourth {
+    height: 16px;
+    width: 25%;
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: #e4e4e4;
+    border-radius: 0px 0px 6px 6px;
+    padding: 6px;
+    transition: all 125ms linear;
+    margin-bottom: 8px;
+}
+
+.first{
+    border-top-left-radius: 12px;
+}
+
+.fourth{
+    border-top-right-radius: 12px;
+}
+
+
+.first:hover,
+.second:hover,
+.third:hover,
+.fourth:hover {
+    height: 24px;
+    background-color: #cbc2c2;
+    transition: all 125ms linear;
+    margin-bottom: 0px;
+}
+
+
 
 .box {
     position: absolute;
@@ -647,7 +703,7 @@ h3 {
     position: absolute;
     width: 50px;
     height: 50px;
-    top: 12px;
+    top: calc(50% - 66px);
     right: 0px;
     opacity: 1;
     cursor: pointer;
@@ -965,14 +1021,14 @@ button:hover {
     .arrowleft img,
     .arrowRight img {
         background-color: rgba(255, 255, 255, 0);
-        opacity: 0.5;
+        opacity: 0.24;
     }
 
     .closeCardofPoke {
         z-index: 2;
         margin: 6px;
         background-color: rgba(255, 255, 255, 0);
-        opacity: 0.5;
+        opacity: 0.24;
     }
 
     .arrowleft img:hover,

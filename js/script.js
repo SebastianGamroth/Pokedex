@@ -156,12 +156,18 @@ async function renderPokeCard(i) {
                <div class="arrowleft"><img id="returnPoco" onclick="nextCardofPoke(0,${i})" src="./img/arrowLeftRight.svg"></div>
                <div class="arrowRight"><img id="nextPoco" onclick="nextCardofPoke(1,${i})" src="./img/arrowLeftRight.svg"></div>
                <img class="closeCardofPoke" onclick="closePokoCard()" src="./img/close.svg">
-           
         </div>
 
         <div class="pokeCardContainer cardOverflow ${pokeCardsSpecies.color.name}" style="border: 1px solid ${pokeCardsSpecies.color.name}" id="pokeContainer">
-            
-            <div class="pokeHeader">
+        
+        <div class="headerNavitagion">
+            <div onclick="renderFlavor(${i})" class="first">Flavor</div>
+            <div onclick="renderBaseStats(${i})" class="second">BaseStats</div>
+            <div onclick="renderDevelopments(${i})" class="third">Developments</div>
+            <div onclick="renderInfo(${i})" class="fourth">Info</div>
+        </div>
+
+            <div class="pokeHeader" id="pokeHeader_${i}">
                 <div class="pokeHead">
                     <div class="pokeTitle" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                         <h3 class="color_${pokeCardsSpecies.color.name}">${pokeCardsSpecies.names[8].name}</h3>
@@ -171,22 +177,24 @@ async function renderPokeCard(i) {
                 </div>
                 <img class="pokeImg" src="${alternateImage}">
             </div>
-            <div class="descriptionPoke" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+
+            <div class="descriptionPoke" id="descriptionPoke_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Flavor</h4>
                 <p>${pokeCardsSpecies.flavor_text_entries[6].flavor_text}"</p>
             </div>
-            <div class="pokeType" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+
+            <div class="pokeType" id="pokeType_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Type</h4>
                 <div class="typeMain" id="typeMain_${i}">
                     <div class="${pokeCards.types[0].type.name}" style="box-shadow: 0px 0px 2px 0px #000000"><img class="typeImg" src="./img/${pokeCards.types[0].type.name}.svg">${pokeCards.types[0].type.name}</div>
                 </div>
             </div>
 
-            <div class="baseStatsPoke" id="baseStatsPoke_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+            <div class="baseStatsPoke" id="baseStatsPoke_${i}" id="baseStatsPoke_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Base Stats</h4>
             </div>
 
-            <div class="pokeGender" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+            <div class="pokeGender" id="pokeGender_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <div class="pokeRatio">
                     <h4>Gender ratio</h4>
                     <h5>${gender}</h5>
@@ -196,13 +204,15 @@ async function renderPokeCard(i) {
                     <h5>${pokeCardsSpecies.capture_rate}</h5>
                 </div>
             </div>
-            <div class="pokeDevelopments" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+
+            <div class="pokeDevelopments" id="pokeDevelopments_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
             <h4>Developments</h4>
                 <div class="developmentsImg" id="developmentsPoke_${i}">
 
                 </div>
             </div>
-            <div class="pokeBreeding" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+
+            <div class="pokeBreeding" id="pokeBreeding_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Breeding</h4>
                 <div class="breedingContainer">
                     <div class="breedingMain">
@@ -216,18 +226,19 @@ async function renderPokeCard(i) {
                 </div>
             </div>
 
-            <div class="pokeStrength" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+            <div class="pokeStrength" id="pokeStrength_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Strength</h4>
                 <div class="damageContainer" id="pokeStrength"></div>
 
             </div>
-            <div class="pokeWeakness" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+            
+            <div class="pokeWeakness" id="pokeWeakness_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <h4>Weakness</h4>
                 <div class="damageContainer" id="pokeWeakness"></div>
 
             </div>
 
-            <div class="pokeBodyMass" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+            <div class="pokeBodyMass" id="pokeBodyMass_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
                 <div class="pokeHeight">
                     <h4>Height</h4>
                     <h5>${pokeCards.height / 10} m</h5>
@@ -273,6 +284,88 @@ function baseStatsPoke(iNr) {
             </div>
             `;
     }
+}
+
+// ============== render Base Stats ==============
+
+function renderFlavor(i) {
+    document.getElementById('pokeHeader_' + i).style.display = 'flex';
+    document.getElementById('descriptionPoke_' + i).style.display = 'flex';
+    document.getElementById('pokeGender_' + i).style.display = 'flex';
+
+    document.getElementById('baseStatsPoke_' + i).style.display = 'none';
+
+
+    document.getElementById('pokeDevelopments_' + i).style.display = 'none';
+    document.getElementById('pokeBreeding_' + i).style.display = 'none';
+    document.getElementById('pokeBodyMass_' + i).style.display = 'none';
+
+    document.getElementById('pokeType_' + i).style.display = 'none';
+    document.getElementById('pokeStrength_' + i).style.display = 'none';
+    document.getElementById('pokeWeakness_' + i).style.display = 'none';
+}
+
+// ============== render Base Stats ==============
+
+function renderBaseStats(i) {
+    document.getElementById('baseStatsPoke_' + i).style.display = 'flex';
+
+    document.getElementById('pokeHeader_' + i).style.display = 'none';
+    document.getElementById('descriptionPoke_' + i).style.display = 'none';
+
+    document.getElementById('pokeGender_' + i).style.display = 'none';
+    document.getElementById('pokeDevelopments_' + i).style.display = 'none';
+    document.getElementById('pokeBreeding_' + i).style.display = 'none';
+    document.getElementById('pokeBodyMass_' + i).style.display = 'none';
+
+    document.getElementById('pokeType_' + i).style.display = 'none';
+    document.getElementById('pokeStrength_' + i).style.display = 'none';
+    document.getElementById('pokeWeakness_' + i).style.display = 'none';
+}
+
+// ============== render Developments ==============
+
+function renderDevelopments(i) {
+
+    document.getElementById('pokeDevelopments_' + i).style.display = 'flex';
+    document.getElementById('pokeBreeding_' + i).style.display = 'flex';
+    document.getElementById('pokeBodyMass_' + i).style.display = 'flex';
+
+    document.getElementById('pokeHeader_' + i).style.display = 'none';
+    document.getElementById('pokeGender_' + i).style.display = 'none';
+
+    document.getElementById('descriptionPoke_' + i).style.display = 'none';
+    document.getElementById('baseStatsPoke_' + i).style.display = 'none';
+
+    document.getElementById('pokeType_' + i).style.display = 'none';
+    document.getElementById('pokeStrength_' + i).style.display = 'none';
+    document.getElementById('pokeWeakness_' + i).style.display = 'none';
+
+}
+
+// ============== render all Display none ==============
+
+function renderInfo(i){
+    document.getElementById('pokeType_' + i).style.display = 'flex';
+    document.getElementById('pokeStrength_' + i).style.display = 'flex';
+    document.getElementById('pokeWeakness_' + i).style.display = 'flex';
+
+    document.getElementById('pokeHeader_' + i).style.display = 'none';
+
+    document.getElementById('descriptionPoke_' + i).style.display = 'none';
+    document.getElementById('baseStatsPoke_' + i).style.display = 'none';
+
+    document.getElementById('pokeGender_' + i).style.display = 'none';
+    document.getElementById('pokeDevelopments_' + i).style.display = 'none';
+    document.getElementById('pokeBreeding_' + i).style.display = 'none';
+    document.getElementById('pokeBodyMass_' + i).style.display = 'none';
+}
+
+
+// ============== render all Display none ==============
+
+function renderDisplayNone(i){
+
 }
 
 // ============== developments Poke ==============
