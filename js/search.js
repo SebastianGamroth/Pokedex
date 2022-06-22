@@ -1,6 +1,7 @@
 let letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
 let letterFinish = false;
 
+
 async function searchPoke() {
     let search = document.getElementById('searchPoke').value;
     search = search.toLowerCase();
@@ -9,6 +10,7 @@ async function searchPoke() {
 
     await enterSearch(search);
 }
+
 
 async function enterSearch(search) {
     await loadPoceJson();
@@ -35,6 +37,7 @@ async function enterSearch(search) {
     if (search.length > 5) { letterFinish = true; searchPokeLetter(search, 4, 3, 4); }
 }
 
+
 async function ifSearchOne(search) {
     letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
 
@@ -54,6 +57,7 @@ async function ifSearchOne(search) {
 
     await outputRenderSearch(0, 0);
 }
+
 
 async function searchPokeLetter(search, letterPos, arrayGet, arrayPush) {
 
@@ -80,6 +84,7 @@ async function searchPokeLetter(search, letterPos, arrayGet, arrayPush) {
     await outputRenderSearch(arrayPush, 0);
 }
 
+
 let addZero = 0;
 
 async function outputRenderSearch(firstArray, secondArray) {
@@ -99,6 +104,7 @@ async function outputRenderSearch(firstArray, secondArray) {
     document.getElementById('searchPoke').focus(); XMLDocument
 }
 
+
 function renderOutputSearch(idNum, idNumColor, array) {
     return `
             <ul onclick="showPokoCard(${idNum - 1})">
@@ -108,11 +114,13 @@ function renderOutputSearch(idNum, idNumColor, array) {
         `;
 }
 
+
 function loadAddZero(idNum) {
     addZero = idNum;
     if (idNum.toString().length == 1) { addZero = '00' + addZero.toString() };
     if (idNum.toString().length == 2) { addZero = '0' + idNum.toString() };
 }
+
 
 function closeSearch() {
     document.getElementById('outputSearchPoke').innerHTML = '';

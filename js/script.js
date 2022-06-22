@@ -22,6 +22,7 @@ async function loadPoceJson() {
     pokeJson = await responseJson.json();
 }
 
+
 async function loadPokeApi(i) {
 
     let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
@@ -37,10 +38,12 @@ async function loadPokeApi(i) {
     urlEvolution = pokeCardsSpecies.evolution_chain.url;
 }
 
+
 async function loadDamagePokeApi() {
     let responseSpecies = await fetch(urlDamage);
     pokeCardsDamage = await responseSpecies.json();
 }
+
 
 async function loadEvolutionPokeApi() {
     let responseSpecies = await fetch(urlEvolution);
@@ -62,11 +65,13 @@ async function renderPokeDeck() {
     }
 }
 
+
 function addPokeZero() {
     newPokeID = pokeCards.id;
     if (pokeCards.id.toString().length == 1) { newPokeID = '00' + newPokeID.toString() };
     if (pokeCards.id.toString().length == 2) { newPokeID = '0' + pokeCards.id.toString() };
 }
+
 
 let alternateImage;
 
@@ -78,6 +83,7 @@ function missingPicture() {
         alternateImage = picturePvg;
     }
 }
+
 
 function returnRenderPokeDeck(i) {
     return `
@@ -99,6 +105,7 @@ function returnRenderPokeDeck(i) {
             </div>
             `
 }
+
 
 function typeMainDeck(i) {
     document.getElementById('typeMainDeck_' + i).innerHTML +=
@@ -125,7 +132,12 @@ async function renderPokeCard(i) {
     damagePoke(i);
 }
 
+
 function returnCardBox(i) {
+    let color = pokeCardsSpecies.color.name;
+    if (color == 'yellow') { color = '#505011' };
+    if (color == 'white') { color = '#595959' };
+
     return `
             <div class="box">
                 <div class="arrowleft"><img id="returnPoco" onclick="nextCardofPoke(0,${i})" src="./img/arrowLeftRight.svg"></div>
@@ -136,16 +148,16 @@ function returnCardBox(i) {
             <div class="pokeCardContainer cardOverflow ${pokeCardsSpecies.color.name}" style="border: 1px solid ${pokeCardsSpecies.color.name}" id="pokeContainer">
             
                 <div class="headerNavitagion ${pokeCardsSpecies.color.name}">
-                    <div style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}" onclick="renderDescription(${i})" class="first">Description</div>
-                    <div style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}" onclick="renderBaseStats(${i})" class="second">BaseStats</div>
-                    <div style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}" onclick="renderDevelopments(${i})" class="third">Developments</div>
-                    <div style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}" onclick="renderCapabilities(${i})" class="fourth">Capabilities</div>
+                    <div style="box-shadow: 0px 0px 2px 0px ${color}" onclick="renderDescription(${i})" class="first">Description</div>
+                    <div style="box-shadow: 0px 0px 2px 0px ${color}" onclick="renderBaseStats(${i})" class="second">BaseStats</div>
+                    <div style="box-shadow: 0px 0px 2px 0px ${color}" onclick="renderDevelopments(${i})" class="third">Developments</div>
+                    <div style="box-shadow: 0px 0px 2px 0px ${color}" onclick="renderCapabilities(${i})" class="fourth">Capabilities</div>
                 </div>
 
                 <div class="description" id="description_${i}">
                     <div class="pokeHeader" id="pokeHeader_${i}">
                         <div class="pokeHead">
-                            <div class="pokeTitle" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                            <div class="pokeTitle" style="box-shadow: 0px 0px 2px 0px ${color}">
                                 <h3 class="color_${pokeCardsSpecies.color.name}">${pokeCardsSpecies.names[8].name}</h3>
                                 <span>${pokeCardsSpecies.genera[7].genus}</span>
                             </div>
@@ -154,11 +166,11 @@ function returnCardBox(i) {
                         <img class="pokeImg" src="${alternateImage}">
                     </div>
                     <div class="descriptionPoke" id="descriptionPoke_${i}"
-                        style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                        style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Flavor</h4>
                         <p>${pokeCardsSpecies.flavor_text_entries[6].flavor_text}"</p>
                     </div>
-                    <div class="pokeBodyMass" id="pokeBodyMass_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                    <div class="pokeBodyMass" id="pokeBodyMass_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <div class="pokeHeight">
                             <h4>Height</h4>
                             <h5>${pokeCards.height / 10} m</h5>
@@ -170,18 +182,18 @@ function returnCardBox(i) {
                     </div>
                 </div>
 
-                <div class="baseStatsPoke" id="baseStatsPoke_${i}" id="baseStatsPoke_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                <div class="baseStatsPoke" id="baseStatsPoke_${i}" id="baseStatsPoke_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                     <h4>Base Stats</h4>
                 </div>
                 
                 <div class="developments" id="developments_${i}">
-                    <div class="pokeDevelopments" id="pokeDevelopments_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                    <div class="pokeDevelopments" id="pokeDevelopments_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                     <h4>Developments</h4>
                         <div class="developmentsImg" id="developmentsPoke_${i}">
 
                         </div>
                     </div>  
-                    <div class="pokeBreeding" id="pokeBreeding_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                    <div class="pokeBreeding" id="pokeBreeding_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Breeding</h4>
                         <div class="breedingContainer">
                             <div class="breedingMain">
@@ -197,18 +209,18 @@ function returnCardBox(i) {
                 </div>
                 
                 <div class="capabilities" id="capabilities_${i}">
-                    <div class="pokeType" id="pokeType_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                    <div class="pokeType" id="pokeType_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Type</h4>
                         <div class="typeMain" id="typeMain_${i}">
                             <div class="${pokeCards.types[0].type.name}" style="box-shadow: 0px 0px 2px 0px #000000"><img class="typeImg" src="./img/${pokeCards.types[0].type.name}.svg">${pokeCards.types[0].type.name}</div>
                         </div>
                     </div>
-                    <div class="pokeStrength" id="pokeStrength_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                    <div class="pokeStrength" id="pokeStrength_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Strength</h4>
                         <div class="damageContainer" id="pokeStrength"></div>
 
                     </div>
-                    <div class="pokeWeakness" id="pokeWeakness_${i}" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name}">
+                    <div class="pokeWeakness" id="pokeWeakness_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Weakness</h4>
                         <div class="damageContainer" id="pokeWeakness"></div>
 
@@ -219,12 +231,14 @@ function returnCardBox(i) {
             `;
 }
 
+
 function typeMain(i) {
     document.getElementById('typeMain_' + i).innerHTML +=
         `
         <div class="${pokeCards.types[1].type.name}" style="box-shadow: 0px 0px 2px 0px #000000"><img class="typeImg" src="./img/${pokeCards.types[1].type.name}.svg">${pokeCards.types[1].type.name}</div>
         `;
 }
+
 
 function baseStatsPoke(iNr) {
     for (let i = 0; i < 6; i++) {
@@ -245,12 +259,14 @@ function baseStatsPoke(iNr) {
     }
 }
 
+
 function renderDescription(i) {
     document.getElementById('description_' + i).style.display = 'flex';
     document.getElementById('baseStatsPoke_' + i).style.display = 'none';
     document.getElementById('developments_' + i).style.display = 'none';
     document.getElementById('capabilities_' + i).style.display = 'none';
 }
+
 
 function renderBaseStats(i) {
     document.getElementById('baseStatsPoke_' + i).style.display = 'flex';
@@ -259,12 +275,14 @@ function renderBaseStats(i) {
     document.getElementById('capabilities_' + i).style.display = 'none';
 }
 
+
 function renderDevelopments(i) {
     document.getElementById('developments_' + i).style.display = 'flex';
     document.getElementById('description_' + i).style.display = 'none';
     document.getElementById('baseStatsPoke_' + i).style.display = 'none';
     document.getElementById('capabilities_' + i).style.display = 'none';
 }
+
 
 function renderCapabilities(i) {
     document.getElementById('capabilities_' + i).style.display = 'flex';
@@ -299,6 +317,7 @@ async function developmentsPoke(idNr) {
     sortEvolutionPoke(idNr);
 }
 
+
 function sortEvolutionPoke(idNr) {
     let index = evolutionNameArray.indexOf(pokeName);
     pokeId = idNr;
@@ -309,6 +328,7 @@ function sortEvolutionPoke(idNr) {
 
     pushEvolutionPoke(idNr);
 }
+
 
 async function pushEvolutionPoke(idNr) {
 
@@ -339,6 +359,7 @@ async function damagePoke(idNr) {
     renderDamage(damageTo, damageWeakness);
 }
 
+
 function renderDamage(damage, idName) {
 
     for (let i = 0; i < damage.length; i++) {
@@ -364,6 +385,7 @@ function showPokoCard(i) {
     document.getElementById('card').classList.remove('d-none')
     cardBoolen = true;
 }
+
 
 function closePokoCard() {
     document.getElementById('pokeContainer').innerHTML = ('');
@@ -404,10 +426,12 @@ function navBar() {
     navBarBoolen = !navBarBoolen;
 }
 
+
 function backNavBar() {
     document.getElementById('menu').classList.toggle('d-none');
     document.getElementById('barImg').classList.toggle('barImg');
 }
+
 
 function back() {
     navBarBoolen = !navBarBoolen;
@@ -423,6 +447,7 @@ function back() {
 function arrowUp() {
     window.scrollTo(0, 0);
 }
+
 
 window.onscroll = function () {
     let scrollY = Math.trunc(window.scrollY);
@@ -440,6 +465,7 @@ window.onscroll = function () {
     }
 }
 
+
 function morePokeCards() {
     minNum = pokeDeck;
     pokeDeck += 20;
@@ -453,15 +479,18 @@ function imprint() {
     toggleRegulations('privacy', 'copyright');
 }
 
+
 function privacy() {
     regulationShow('privacy');
     toggleRegulations('imprint', 'copyright');
 }
 
+
 function copyright() {
     regulationShow('copyright');
     toggleRegulations('imprint', 'privacy');
 }
+
 
 function regulationShow(index) {
     window.scrollTo(0, 0);
@@ -469,11 +498,13 @@ function regulationShow(index) {
     hideMenu();
 }
 
+
 function toggleRegulations(first, second, third) {
     document.getElementById(first).classList.add('d-none');
     document.getElementById(second).classList.add('d-none');
     if (third == 'copyright') { document.getElementById(third).classList.add('d-none'); }
 }
+
 
 function hideMenu() {
     document.getElementById('back').classList.remove('d-none');
