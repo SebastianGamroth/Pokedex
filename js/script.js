@@ -262,33 +262,38 @@ function baseStatsPoke(iNr) {
 
 function renderDescription(i) {
     document.getElementById('description_' + i).style.display = 'flex';
-    document.getElementById('baseStatsPoke_' + i).style.display = 'none';
-    document.getElementById('developments_' + i).style.display = 'none';
-    document.getElementById('capabilities_' + i).style.display = 'none';
+    toggleNone('baseStatsPoke_' + i);
+    toggleNone('developments_' + i);
+    toggleNone('capabilities_' + i);
 }
 
 
 function renderBaseStats(i) {
     document.getElementById('baseStatsPoke_' + i).style.display = 'flex';
-    document.getElementById('description_' + i).style.display = 'none';
-    document.getElementById('developments_' + i).style.display = 'none';
-    document.getElementById('capabilities_' + i).style.display = 'none';
+    toggleNone('description_' + i);
+    toggleNone('developments_' + i);
+    toggleNone('capabilities_' + i);
 }
 
 
 function renderDevelopments(i) {
     document.getElementById('developments_' + i).style.display = 'flex';
-    document.getElementById('description_' + i).style.display = 'none';
-    document.getElementById('baseStatsPoke_' + i).style.display = 'none';
-    document.getElementById('capabilities_' + i).style.display = 'none';
+    toggleNone('description_' + i);
+    toggleNone('baseStatsPoke_' + i);
+    toggleNone('capabilities_' + i);
 }
 
 
 function renderCapabilities(i) {
     document.getElementById('capabilities_' + i).style.display = 'flex';
-    document.getElementById('developments_' + i).style.display = 'none';
-    document.getElementById('description_' + i).style.display = 'none';
-    document.getElementById('baseStatsPoke_' + i).style.display = 'none';
+    toggleNone('developments_' + i);
+    toggleNone('description_' + i);
+    toggleNone('baseStatsPoke_' + i);
+}
+
+
+function toggleNone(name) {
+    document.getElementById(name).style.display = 'none';
 }
 
 // ============== developments Poke ==============
@@ -335,9 +340,13 @@ async function pushEvolutionPoke(idNr) {
     for (let i = 0; i < evolutionNameArray.length; i++) {
         await loadPokeApi(evolutionPicsArray[i]);
 
+        let color = pokeCardsSpecies.color.name;
+        if (color == 'yellow') { color = '#505011' };
+        if (color == 'white') { color = '#595959' };
+
         document.getElementById('developmentsPoke_' + idNr).innerHTML +=
             `
-        <div class="pokoChain" style="box-shadow: 0px 0px 2px 0px ${pokeCardsSpecies.color.name};">
+        <div class="pokoChain" style="box-shadow: 0px 0px 2px 0px ${color};">
             <img src="${pokeCards.sprites.other.dream_world.front_default}">
             <h5>${evolutionNameArray[i]}</h5>
         </div>
@@ -414,8 +423,8 @@ function nextCardofPoke(id, i) {
 let navBarBoolen = false;
 
 function navBar() {
-    if (navBarBoolen == false) { document.getElementById('body').classList.add('overflow'); }
-    if (navBarBoolen == true && cardBoolen == false) { document.getElementById('body').classList.remove('overflow'); }
+    if (!navBarBoolen) { document.getElementById('body').classList.add('overflow'); }
+    if (navBarBoolen && !cardBoolen) { document.getElementById('body').classList.remove('overflow'); }
 
     document.getElementById('menu').classList.toggle('d-none');
     document.getElementById('barImg').classList.toggle('barImg');

@@ -42,9 +42,9 @@ async function ifSearchOne(search) {
     letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
 
     for (let i = 0; i < pokeJson[0].length; i++) {
-        let currentPoke = pokeJson[2][i];
+        let currentPoke = pokeJson[1][i];
 
-        if (pokeJson[2][i].toLowerCase().charAt(0).includes(search[0]) && search.length == 1) {
+        if (pokeJson[1][i].toLowerCase().charAt(0).includes(search[0]) && search.length == 1) {
             letterArray[0][0].push(i + 1);
             letterArray[0][1].push(currentPoke);
         }
@@ -65,7 +65,7 @@ async function searchPokeLetter(search, letterPos, arrayGet, arrayPush) {
         let currentPokeNumber = letterArray[arrayGet][0][i]
         let currentPoke = letterArray[arrayGet][1][i];
 
-        if (letterFinish == true) {
+        if (letterFinish) {
             if (letterArray[arrayGet][1][i].toLowerCase().includes(search)) {
 
                 letterArray[arrayPush][0] = [];
@@ -93,7 +93,7 @@ async function outputRenderSearch(firstArray, secondArray) {
 
     for (let i = 0; i < letterArray[firstArray][secondArray].length; i++) {
         let idNum = letterArray[firstArray][secondArray][i];
-        let idNumColor = pokeJson[1][idNum - 1];
+        let idNumColor = pokeJson[0][idNum - 1];
 
         loadAddZero(idNum);
 

@@ -6,6 +6,7 @@ body {
     margin: 0px;
     font-family: 'Open Sans';
     /* height: 100vh; */
+    background-color: #f9f9f9;
 }
 
 @font-face {
@@ -80,7 +81,7 @@ header {
     box-shadow: 0px 0px 2px 1px #888888;
 }
 
-.pokeContainerDeck:hover{
+.pokeContainerDeck:hover {
     transform: scale(1.05);
     transition: all 125ms linear;
     box-shadow: 0px 0px 2.2px 1.6px #888888;
@@ -127,6 +128,18 @@ header {
     height: 70px;
     margin-right: 6px;
     margin-bottom: 6px;
+    transition: all 125ms linear;
+}
+
+.pokeContainerDeck:hover .pokeImgDeck {
+    transform: scale(1.4);
+    transition: all 125ms linear;
+}
+
+.pokeImgDeck:hover {
+    animation-name: pokeOut;
+    animation-duration: 0.4s;
+    animation-iteration-count: inherit;
 }
 
 /* poke card */
@@ -174,9 +187,10 @@ header {
     height: 120px;
     margin-bottom: 6px;
     transition: all 125ms linear;
+    cursor: pointer;
 }
 
-.pokeImg:hover{
+.pokeImg:hover {
     transform: scale(1.36);
     transition: all 125ms linear;
 }
@@ -319,18 +333,25 @@ header {
     border-radius: 6px;
     margin: 6px 6px;
     padding: 3px 12px;
-}
-
-.developmentsImg img {
-    width: 60px;
-    height: 60px;
-    margin-top: 6px;
     transition: all 125ms linear;
     cursor: pointer;
 }
 
-.developmentsImg img:hover {
-    transform: scale(1.5);
+.pokoChain:hover{
+    transform: scale(1.1);
+    transition: all 125ms linear;
+    box-shadow: 0px 0px 2.2px 1.6px #888888;
+}
+
+.pokoChain img {
+    width: 60px;
+    height: 60px;
+    margin-top: 6px;
+    transition: all 125ms linear;
+}
+
+.pokoChain:hover img {
+    transform: scale(1.4);
     transition: all 125ms linear;
 }
 
@@ -565,6 +586,7 @@ h3 {
     border-radius: 6px;
     padding: 6px;
     margin-bottom: 16px;
+    background-color: white;
 }
 
 .searchContainer img {
