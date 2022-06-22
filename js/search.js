@@ -1,7 +1,6 @@
 let letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
 let letterFinish = false;
 
-
 async function searchPoke() {
     let search = document.getElementById('searchPoke').value;
     search = search.toLowerCase();
@@ -23,25 +22,7 @@ async function enterSearch(search) {
         document.getElementById('searchPoke').focus(); XMLDocument
     }
 
-    if (search.length == 1) {
-        letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
-
-        for (let i = 0; i < pokeJson[0].length; i++) {
-            let currentPoke = pokeJson[2][i]; // englisch 2
-
-            if (pokeJson[2][i].toLowerCase().charAt(0).includes(search[0]) && search.length == 1) {
-                letterArray[0][0].push(i + 1);
-                letterArray[0][1].push(currentPoke);
-            }
-
-            if (search.length < 0) {
-                document.getElementById('outputSearchPoke').innerHTML = '';
-                document.getElementById('searchPoke').value = '';
-            }
-        };
-
-        await outputRenderSearch(0, 0);
-    }
+    if (search.length == 1) { await ifSearchOne(search); }
 
     if (search.length == 2) { letterArray[1] = [[], []]; searchPokeLetter(search, 1, 0, 1); }
 
@@ -54,12 +35,31 @@ async function enterSearch(search) {
     if (search.length > 5) { letterFinish = true; searchPokeLetter(search, 4, 3, 4); }
 }
 
+async function ifSearchOne(search) {
+    letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
+
+    for (let i = 0; i < pokeJson[0].length; i++) {
+        let currentPoke = pokeJson[2][i];
+
+        if (pokeJson[2][i].toLowerCase().charAt(0).includes(search[0]) && search.length == 1) {
+            letterArray[0][0].push(i + 1);
+            letterArray[0][1].push(currentPoke);
+        }
+
+        if (search.length < 0) {
+            document.getElementById('outputSearchPoke').innerHTML = '';
+            document.getElementById('searchPoke').value = '';
+        }
+    };
+
+    await outputRenderSearch(0, 0);
+}
+
 async function searchPokeLetter(search, letterPos, arrayGet, arrayPush) {
 
     for (let i = 0; i < letterArray[arrayGet][1].length; i++) {
         let currentPokeNumber = letterArray[arrayGet][0][i]
         let currentPoke = letterArray[arrayGet][1][i];
-
 
         if (letterFinish == true) {
             if (letterArray[arrayGet][1][i].toLowerCase().includes(search)) {
@@ -88,26 +88,33 @@ async function outputRenderSearch(firstArray, secondArray) {
 
     for (let i = 0; i < letterArray[firstArray][secondArray].length; i++) {
         let idNum = letterArray[firstArray][secondArray][i];
-        let idNumColor = pokeJson[1][idNum-1];
+        let idNumColor = pokeJson[1][idNum - 1];
 
         loadAddZero(idNum);
 
-
-        list.innerHTML +=
-            `
-                <ul onclick="showPokoCard(${idNum - 1})">
-                    <a onclick="closeSearch()" class="color_${idNumColor}" href="#">${letterArray[firstArray][1][i]}</a>    
-                    <a onclick="closeSearch()" class="color_${idNumColor}" href="#">#${addZero}</a>
-                </ul>
-            `;
+        list.innerHTML += renderOutputSearch(idNum, idNumColor, letterArray[firstArray][1][i]);
     }
 
     document.getElementById('searchPoke').disabled = false;
     document.getElementById('searchPoke').focus(); XMLDocument
 }
 
+function renderOutputSearch(idNum, idNumColor, array) {
+    return `
+            <ul onclick="showPokoCard(${idNum - 1})">
+                <a onclick="closeSearch()" class="color_${idNumColor}" href="#">${array}</a>    
+                <a onclick="closeSearch()" class="color_${idNumColor}" href="#">#${addZero}</a>
+            </ul>
+        `;
+}
+
 function loadAddZero(idNum) {
     addZero = idNum;
     if (idNum.toString().length == 1) { addZero = '00' + addZero.toString() };
     if (idNum.toString().length == 2) { addZero = '0' + idNum.toString() };
+}
+
+function closeSearch() {
+    document.getElementById('outputSearchPoke').innerHTML = '';
+    document.getElementById('searchPoke').value = '';
 }

@@ -387,21 +387,6 @@ function nextCardofPoke(id, i) {
     }
 }
 
-// ============== search Poke Cards ==============
-
-function closeSearch() {
-    document.getElementById('outputSearchPoke').innerHTML = '';
-    document.getElementById('searchPoke').value = '';
-}
-
-// ============== add 20 Poke Cards ==============
-
-function morePokeCards() {
-    minNum = pokeDeck;
-    pokeDeck += 20;
-    renderPokeDeck();
-}
-
 // ============== navigation menu ==============
 
 let navBarBoolen = false;
@@ -433,8 +418,7 @@ function back() {
     toggleRegulations('imprint', 'privacy', 'copyright');
 }
 
-// ============== jump to top window ==============
-// ============== reload more Poke automatically ==============
+// ============== jump top - more Poke ==============
 
 function arrowUp() {
     window.scrollTo(0, 0);
@@ -454,6 +438,12 @@ window.onscroll = function () {
     if (scrollY + window.innerHeight + 1 >= document.body.clientHeight) {
         morePokeCards();
     }
+}
+
+function morePokeCards() {
+    minNum = pokeDeck;
+    pokeDeck += 20;
+    renderPokeDeck();
 }
 
 // ============== page Laws ==============

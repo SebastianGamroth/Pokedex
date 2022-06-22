@@ -31,7 +31,6 @@ h4 {
     font-weight: 600;
     margin: 6px;
     color: #4b4b4b;
-    ;
 }
 
 h3 {
@@ -52,157 +51,6 @@ span {
     color: rgb(48, 48, 48);
 }
 
-/* color background */
-
-.green {
-    background-color: #d2ffd2;
-}
-
-.red {
-    background-color: #ffd1d1;
-}
-
-.blue {
-    background-color: #d4d1ff;
-}
-
-.white {
-    background-color: #f1f1f1;
-}
-
-.yellow {
-    background-color: #ffffc7;
-}
-
-.brown {
-    background-color: #eed0a0;
-}
-
-.purple {
-    background-color: #ffc7ff;
-}
-
-.pink {
-    background-color: #ffdae0;
-}
-
-.gray {
-    background-color: #cbcbcb;
-}
-
-.black {
-    background-color: #b4b4b4;
-}
-
-/* color TextTitle */
-.color_green {
-    color: #3c893f;
-}
-
-.color_red {
-    color: #e42525;
-}
-
-.color_blue {
-    color: #41419f;
-}
-
-.color_white {
-    color: rgb(87, 135, 138);
-}
-
-.color_yellow {
-    color: rgb(151, 151, 36)
-}
-
-.color_purple {
-    color: #932b93;
-}
-
-.color_brown {
-    color: #754837;
-}
-
-.color_purple {
-    color: purple;
-}
-
-.color_pink {
-    color: rgb(170, 85, 99);
-}
-
-.color_gray {
-    color: rgb(63, 63, 63);
-}
-
-/* color Icons */
-.flying {
-    background-color: #89aae3;
-}
-
-.poison {
-    background-color: #b567ce;
-}
-
-.bug {
-    background-color: #83c300;
-}
-
-.fire {
-    background-color: #f08030;
-}
-
-.ice {
-    background-color: #74cebf;
-}
-
-.ground {
-    background-color: #e87236;
-}
-
-.rock {
-    background-color: #c6b78a;
-}
-
-.water {
-    background-color: #3692dc;
-}
-
-.grass {
-    background-color: #4cc834;
-}
-
-.electric {
-    background-color: #fbd100;
-}
-
-.psychic {
-    background-color: #f87176;
-}
-
-.dark {
-    background-color: #5a5466;
-}
-
-.fighting {
-    background-color: #cd4169;
-}
-
-.normal {
-    background-color: #919aa2;
-}
-
-.fairy {
-    background-color: #eb8fe5;
-}
-
-.steel {
-    background-color: #5a8ea1;
-}
-
-.dragon {
-    background-color: #096dc3;
-}
 
 /* header */
 header {
@@ -288,7 +136,6 @@ header {
     border-radius: 16px;
     cursor: pointer;
 }
-
 
 .description {
     display: flex;
@@ -382,7 +229,6 @@ header {
 
 .typeMain div {
     display: flex;
-    /* background-color: #ffffff; */
     border-radius: 6px;
     padding: 6px;
 }
@@ -401,9 +247,7 @@ header {
     border-radius: 6px;
     padding: 6px;
     margin-bottom: 6px;
-    /* height: calc(100% - 64px); */
     height: 100%;
-
 }
 
 .statsContainer {
@@ -563,8 +407,6 @@ header {
     margin-bottom: 6px;
 }
 
-
-
 h2,
 h3 {
     margin: 0px;
@@ -574,9 +416,6 @@ h3 {
     width: 24px;
     height: 24px;
 }
-
-
-
 
 .card {
     position: fixed;
@@ -600,7 +439,6 @@ h3 {
     height: 100%;
     border-radius: 16px;
     padding: 6px;
-    /* padding: 0px 6px 6px 6px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -635,7 +473,6 @@ h3 {
     border-top-right-radius: 12px;
 }
 
-
 .first:hover,
 .second:hover,
 .third:hover,
@@ -645,8 +482,6 @@ h3 {
     transition: all 125ms linear;
     margin-bottom: 0px;
 }
-
-
 
 .box {
     position: absolute;
@@ -719,7 +554,6 @@ h3 {
     display: none;
 }
 
-
 /* search Poke */
 .searchContainer {
     position: relative;
@@ -778,7 +612,6 @@ h3 {
 
 .outputSearchPoke ul a {
     text-decoration: none;
-    /* color: rgb(21, 21, 21); */
 }
 
 /* navigation bar */
@@ -840,7 +673,6 @@ h3 {
     position: fixed;
     width: 40px;
     height: 40px;
-    /* background-color: greenyellow; */
     top: 12px;
     right: 90px;
     cursor: pointer;
@@ -1029,7 +861,6 @@ h3 {
     .fourth {
         border-top-right-radius: 0px;
         border-bottom-right-radius: 12px;
-        /* margin-bottom: 8px; */
     }
 
     .first:hover,
@@ -1040,7 +871,6 @@ h3 {
         height: 16px;
         background-color: #ffffffd3;
         transition: all 125ms linear;
-        /* margin-bottom: 8px; */
     }
 
     .pokeImg {
