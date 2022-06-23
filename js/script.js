@@ -224,14 +224,14 @@ function returnCardBox(i) {
                             <div class="${pokeCards.types[0].type.name}" style="box-shadow: 0px 0px 2px 0px #000000"><img class="typeImg" src="./img/${pokeCards.types[0].type.name}.svg">${pokeCards.types[0].type.name}</div>
                         </div>
                     </div>
-                    <div class="pokeStrength" id="pokeStrength_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
+                    <div class="pokeWeakness" id="pokeWeakness_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Strength</h4>
-                        <div class="damageContainer" id="pokeStrength"></div>
+                        <div class="damageContainer" id="pokeWeakness"></div>
 
                     </div>
-                    <div class="pokeWeakness" id="pokeWeakness_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
+                    <div class="pokeStrength" id="pokeStrength_${i}" style="box-shadow: 0px 0px 2px 0px ${color}">
                         <h4>Weakness</h4>
-                        <div class="damageContainer" id="pokeWeakness"></div>
+                        <div class="damageContainer" id="pokeStrength"></div>
 
                     </div>
                 </div>
