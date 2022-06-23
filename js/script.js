@@ -137,6 +137,7 @@ function returnCardBox(i) {
     let color = pokeCardsSpecies.color.name;
     if (color == 'yellow') { color = '#505011' };
     if (color == 'white') { color = '#595959' };
+    if (color == 'pink') { color = '#783c46' };
 
     return `
             <div class="box">
@@ -339,19 +340,25 @@ async function pushEvolutionPoke(idNr) {
 
     for (let i = 0; i < evolutionNameArray.length; i++) {
         await loadPokeApi(evolutionPicsArray[i]);
+        missingPicture();
 
         let color = pokeCardsSpecies.color.name;
         if (color == 'yellow') { color = '#505011' };
         if (color == 'white') { color = '#595959' };
+        if (color == 'pink') { color = '#783c46' };
 
-        document.getElementById('developmentsPoke_' + idNr).innerHTML +=
-            `
-        <div class="pokoChain" style="box-shadow: 0px 0px 2px 0px ${color};">
-            <img src="${pokeCards.sprites.other.dream_world.front_default}">
-            <h5>${evolutionNameArray[i]}</h5>
-        </div>
-        `;
+        document.getElementById('developmentsPoke_' + idNr).innerHTML += renderEvolutionPoke(i, color);
     }
+}
+
+
+function renderEvolutionPoke(i, color) {
+    return `
+            <div class="pokoChain" style="box-shadow: 0px 0px 2px 0px ${color};">
+                <img src="${alternateImage}">
+                <h5>${evolutionNameArray[i]}</h5>
+            </div>
+            `;
 }
 
 // ============== damage of Poke  ==============
@@ -416,108 +423,4 @@ function nextCardofPoke(id, i) {
         closePokoCard();
         showPokoCard(i + 1);
     }
-}
-
-// ============== navigation menu ==============
-
-let navBarBoolen = false;
-
-function navBar() {
-    if (!navBarBoolen) { document.getElementById('body').classList.add('overflow'); }
-    if (navBarBoolen && !cardBoolen) { document.getElementById('body').classList.remove('overflow'); }
-
-    document.getElementById('menu').classList.toggle('d-none');
-    document.getElementById('barImg').classList.toggle('barImg');
-
-    document.getElementById('pageLaws').classList.toggle('d-none');
-    toggleRegulations('imprint', 'privacy', 'copyright');
-
-    navBarBoolen = !navBarBoolen;
-}
-
-
-function backNavBar() {
-    document.getElementById('menu').classList.toggle('d-none');
-    document.getElementById('barImg').classList.toggle('barImg');
-}
-
-
-function back() {
-    navBarBoolen = !navBarBoolen;
-    document.getElementById('body').classList.remove('overflow');
-    document.getElementById('pageLaws').classList.toggle('d-none');
-    document.getElementById('backNavBar').classList.add('d-none');
-    document.getElementById('back').classList.add('d-none');
-    toggleRegulations('imprint', 'privacy', 'copyright');
-}
-
-// ============== jump top - more Poke ==============
-
-function arrowUp() {
-    window.scrollTo(0, 0);
-}
-
-
-window.onscroll = function () {
-    let scrollY = Math.trunc(window.scrollY);
-
-    if (scrollY < 120) {
-        document.getElementById('arrowUp').style.display = 'none';
-    }
-
-    if (scrollY > 120) {
-        document.getElementById('arrowUp').style.display = 'flex';;
-    }
-
-    if (scrollY + window.innerHeight + 1 >= document.body.clientHeight) {
-        morePokeCards();
-    }
-}
-
-
-function morePokeCards() {
-    minNum = pokeDeck;
-    pokeDeck += 20;
-    renderPokeDeck();
-}
-
-// ============== page Laws ==============
-
-function imprint() {
-    regulationShow('imprint');
-    toggleRegulations('privacy', 'copyright');
-}
-
-
-function privacy() {
-    regulationShow('privacy');
-    toggleRegulations('imprint', 'copyright');
-}
-
-
-function copyright() {
-    regulationShow('copyright');
-    toggleRegulations('imprint', 'privacy');
-}
-
-
-function regulationShow(index) {
-    window.scrollTo(0, 0);
-    document.getElementById(index).classList.remove('d-none');
-    hideMenu();
-}
-
-
-function toggleRegulations(first, second, third) {
-    document.getElementById(first).classList.add('d-none');
-    document.getElementById(second).classList.add('d-none');
-    if (third == 'copyright') { document.getElementById(third).classList.add('d-none'); }
-}
-
-
-function hideMenu() {
-    document.getElementById('back').classList.remove('d-none');
-    document.getElementById('backNavBar').classList.remove('d-none');
-    document.getElementById('menu').classList.toggle('d-none');
-    document.getElementById('barImg').classList.toggle('barImg');
 }

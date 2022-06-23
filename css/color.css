@@ -39,6 +39,10 @@
     background-color: #b4b4b4;
 }
 
+.ghost {
+    background-color: #bbbbbb;
+}
+
 /* color TextTitle */
 .color_green {
     color: #3c893f;
