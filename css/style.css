@@ -52,6 +52,29 @@ span {
     color: rgb(48, 48, 48);
 }
 
+/* loadig */
+.loading{
+    z-index: 5;
+    background-color: rgba(155, 188, 237, 0.285);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading h6{
+    font-size: 24px;
+    background-color: #d3d309;
+    padding: 13px 48px;
+    color: #2d2d2d;
+    border-radius: 8px;
+    border: 1px solid rgb(95 112 226);
+    box-shadow: 0px 0px 2px 1px #888888;
+}
 
 /* header */
 header {

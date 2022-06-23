@@ -54,6 +54,10 @@ async function loadEvolutionPokeApi() {
 // ============== render Poke Deck ==============
 
 async function renderPokeDeck() {
+
+    document.getElementById('loading').style.display = ('flex');
+    document.getElementById('body').style.overflowY = ('hidden');
+
     for (let i = minNum; i < pokeDeck; i++) {
         await loadPokeApi(i);
 
@@ -64,6 +68,9 @@ async function renderPokeDeck() {
 
         if (pokeCards.types.length > 1) { typeMainDeck(i); } // query Is Existing
     }
+
+    document.getElementById('loading').style.display = ('none');
+    document.getElementById('body').style.overflowY = ('auto');
 }
 
 
