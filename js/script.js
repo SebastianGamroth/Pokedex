@@ -424,3 +424,11 @@ function nextCardofPoke(id, i) {
         showPokoCard(i + 1);
     }
 }
+
+// ============== add 20 Poke Cards ==============
+
+function morePokeCards() {
+    minNum = pokeDeck;
+    pokeDeck += 20;
+    renderPokeDeck();
+}

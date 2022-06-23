@@ -49,17 +49,17 @@ window.onscroll = function () {
         document.getElementById('arrowUp').style.display = 'flex';;
     }
 
-    if (scrollY + window.innerHeight + 1 >= document.body.clientHeight) {
-        morePokeCards();
-    }
+    // if (scrollY + window.innerHeight + 1 >= document.body.clientHeight) {
+    //     morePokeCards();
+    // }
 }
 
 
-function morePokeCards() {
-    minNum = pokeDeck;
-    pokeDeck += 20;
-    renderPokeDeck();
-}
+// function morePokeCards() {
+//     minNum = pokeDeck;
+//     pokeDeck += 20;
+//     renderPokeDeck();
+// }
 
 // ============== page Laws ==============
 
