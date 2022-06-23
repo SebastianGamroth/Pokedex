@@ -53,7 +53,7 @@ span {
 }
 
 /* loadig */
-.loading{
+.loading {
     z-index: 5;
     background-color: rgba(155, 188, 237, 0.285);
     position: fixed;
@@ -66,14 +66,27 @@ span {
     align-items: center;
 }
 
-.loading h6{
-    font-size: 24px;
+.loadingBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #d3d309;
-    padding: 13px 48px;
+    padding: 0px 16px;
     color: #2d2d2d;
     border-radius: 8px;
     border: 1px solid rgb(95 112 226);
     box-shadow: 0px 0px 2px 1px #888888;
+}
+
+.loadingBox img {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+.loading h6 {
+    font-size: 24px;
+    margin: 6px;
 }
 
 /* header */
