@@ -1,5 +1,6 @@
 let pokeDeck = 20;
 
+let pokeJson;
 let pokeCards;
 let pokeCardsSpecies;
 let pokeCardsDamage;
@@ -299,8 +300,14 @@ function toggleNone(name) {
 
 // ============== developments Poke ==============
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 async function developmentsPoke(idNr) {
     await loadEvolutionPokeApi(idNr);
+    await loadPoceJson();
+
     evolutionNameArray = [];
     evolutionPicsArray = [];
 
@@ -310,8 +317,18 @@ async function developmentsPoke(idNr) {
         evolutionPicsArray.push(idNr);
 
         if (pokeCardsEvolves.chain.evolves_to[0]) {
-            evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].species.name);
-            evolutionPicsArray.push(idNr + 1);
+            let number = pokeCardsEvolves.chain.evolves_to;
+
+            for (let i = 0; i < number.length; i++) {
+
+                evolutionNameArray.push(number[i].species.name);
+
+                let names = capitalizeFirstLetter(number[i].species.name);
+
+                let newIdNr = pokeJson[1].indexOf(names);
+
+                evolutionPicsArray.push(newIdNr);
+            }
 
             if (pokeCardsEvolves.chain.evolves_to[0].evolves_to[0]) {
                 evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name);
@@ -319,19 +336,6 @@ async function developmentsPoke(idNr) {
             }
         }
     }
-
-    sortEvolutionPoke(idNr);
-}
-
-
-function sortEvolutionPoke(idNr) {
-    let index = evolutionNameArray.indexOf(pokeName);
-    pokeId = idNr;
-
-    if (index == 0) { evolutionPicsArray = [pokeId++, pokeId++, pokeId++] };
-    if (index == 1) { evolutionPicsArray = [pokeId -= 1, pokeId += 1, pokeId += 1] };
-    if (index == 2) { evolutionPicsArray = [pokeId -= 2, pokeId += 1, pokeId += 1] };
-
     pushEvolutionPoke(idNr);
 }
 
