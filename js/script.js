@@ -302,7 +302,8 @@ function toggleNone(name) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+}
+
 
 async function developmentsPoke(idNr) {
     await loadEvolutionPokeApi(idNr);
@@ -313,39 +314,37 @@ async function developmentsPoke(idNr) {
 
     let names;
     let newIdNr;
+    let evolutionName;
 
     if (pokeCardsEvolves.chain) {
         pokeName = pokeCards.name;
-        evolutionNameArray.push(pokeCardsEvolves.chain.species.name);
 
-        names = capitalizeFirstLetter(pokeCardsEvolves.chain.species.name);
-        newIdNr = pokeJson[1].indexOf(names);
-
-        evolutionPicsArray.push(newIdNr);
+        evolutionName = pokeCardsEvolves.chain.species.name;
+        pushEvolutionName(evolutionName, names, newIdNr);
 
         if (pokeCardsEvolves.chain.evolves_to[0]) {
             let number = pokeCardsEvolves.chain.evolves_to;
 
             for (let i = 0; i < number.length; i++) {
-
-                evolutionNameArray.push(number[i].species.name);
-                names = capitalizeFirstLetter(number[i].species.name);
-                newIdNr = pokeJson[1].indexOf(names);
-
-                evolutionPicsArray.push(newIdNr);
+                evolutionName = number[i].species.name;
+                pushEvolutionName(evolutionName, names, newIdNr);
             }
 
             if (pokeCardsEvolves.chain.evolves_to[0].evolves_to[0]) {
-                evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name);
-
-                names = capitalizeFirstLetter(pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name);
-                newIdNr = pokeJson[1].indexOf(names);
-
-                evolutionPicsArray.push(newIdNr);
+                evolutionName = pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name;
+                pushEvolutionName(evolutionName, names, newIdNr);
             }
         }
     }
     pushEvolutionPoke(idNr);
+}
+
+
+function pushEvolutionName(evolutionName, names, newIdNr) {
+    evolutionNameArray.push(evolutionName);
+    names = capitalizeFirstLetter(evolutionName);
+    newIdNr = pokeJson[1].indexOf(names);
+    evolutionPicsArray.push(newIdNr);
 }
 
 
