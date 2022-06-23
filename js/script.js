@@ -332,7 +332,7 @@ async function developmentsPoke(idNr) {
 
             if (pokeCardsEvolves.chain.evolves_to[0].evolves_to[0]) {
                 evolutionNameArray.push(pokeCardsEvolves.chain.evolves_to[0].evolves_to[0].species.name);
-                evolutionPicsArray.push(idNr + 2);
+                evolutionPicsArray.push(idNr);
             }
         }
     }
