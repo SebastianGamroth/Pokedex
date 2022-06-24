@@ -56,7 +56,7 @@ async function loadEvolutionPokeApi() {
 async function renderPokeDeck() {
 
     document.getElementById('loading').style.display = ('flex');
-    document.getElementById('body').style.overflowY = ('hidden');
+    document.getElementById('body').classList.add('overflow')
 
     for (let i = minNum; i < pokeDeck; i++) {
         await loadPokeApi(i);
@@ -70,7 +70,7 @@ async function renderPokeDeck() {
     }
 
     document.getElementById('loading').style.display = ('none');
-    document.getElementById('body').style.overflowY = ('auto');
+    document.getElementById('body').classList.remove('overflow')
 }
 
 
