@@ -1,4 +1,4 @@
-[
+let pokeArray = [
   [
     "green",
     "green",
@@ -1799,4 +1799,4 @@
     "Spectrier",
     "Calyrex"
   ]  
-]
+];

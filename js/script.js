@@ -1,6 +1,6 @@
 let pokeDeck = 20;
 
-let pokeJson;
+// let pokeJson;
 let pokeCards;
 let pokeCardsSpecies;
 let pokeCardsDamage;
@@ -18,10 +18,10 @@ let newPokeID = 0;
 
 // ============== API ==============
 
-async function loadPoceJson() {
-    let responseJson = await fetch('./json/poke.json');
-    pokeJson = await responseJson.json();
-}
+// async function loadPoceJson() {
+//     let responseJson = await fetch('./json/poke.json');
+//     pokeJson = await responseJson.json();
+// }
 
 
 async function loadPokeApi(i) {
@@ -71,6 +71,8 @@ async function renderPokeDeck() {
 
     document.getElementById('loading').style.display = ('none');
     document.getElementById('body').classList.remove('overflow')
+
+    moreByScroll();
 }
 
 
@@ -314,7 +316,7 @@ function capitalizeFirstLetter(string) {
 
 async function developmentsPoke(idNr) {
     await loadEvolutionPokeApi(idNr);
-    await loadPoceJson();
+    // await loadPoceJson();
 
     evolutionNameArray = [];
     evolutionPicsArray = [];
@@ -350,7 +352,7 @@ async function developmentsPoke(idNr) {
 function pushEvolutionName(evolutionName, names, newIdNr) {
     evolutionNameArray.push(evolutionName);
     names = capitalizeFirstLetter(evolutionName);
-    newIdNr = pokeJson[1].indexOf(names);
+    newIdNr = pokeArray[1].indexOf(names);
     evolutionPicsArray.push(newIdNr);
 }
 

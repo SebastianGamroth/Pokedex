@@ -1,52 +1,155 @@
-let letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
 let letterFinish = false;
 
+let nameNew;
+let idNew;
+let addZero = 0;
 
-async function searchPoke() {
+let array0 = [[], [], [], []];
+
+
+function searchPoke() {
     let search = document.getElementById('searchPoke').value;
     search = search.toLowerCase();
 
-    document.getElementById('searchPoke').disabled = true;
-
-    await enterSearch(search);
+    newSearch3(search);
 }
 
+// ============== serach 1 ==============
 
-async function enterSearch(search) {
-    await loadPoceJson();
+function newSearch(search) {
 
     let list = document.getElementById('outputSearchPoke');
     list.innerHTML = '';
 
     if (search.length == 0) {
-        letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
+        document.getElementById('outputSearchPoke').innerHTML = '';
+        document.getElementById('searchPoke').value = '';
+
         document.getElementById('searchPoke').disabled = false;
         document.getElementById('searchPoke').focus(); XMLDocument
     }
 
-    if (search.length == 1) { await ifSearchOne(search); }
-
-    if (search.length == 2) { letterArray[1] = [[], []]; searchPokeLetter(search, 1, 0, 1); }
-
-    if (search.length == 3) { letterArray[2] = [[], []]; searchPokeLetter(search, 2, 1, 2); }
-
-    if (search.length == 4) { letterArray[3] = [[], []]; searchPokeLetter(search, 3, 2, 3); }
-
-    if (search.length == 5) { letterFinish = false; letterArray[4] = [[], []]; searchPokeLetter(search, 4, 3, 4); }
-
-    if (search.length > 5) { letterFinish = true; searchPokeLetter(search, 4, 3, 4); }
+    if (search.length == 1) { array0 = [[], [], [], []]; renderSearch_1(search); }
+    if (search.length == 2) { array0[1] = []; renderSearch_2(search, 0, 1); }
+    if (search.length == 3) { letterFinish = false; array0[2] = []; renderSearch_2(search, 1, 2); }
+    if (search.length >= 4) { letterFinish = true; array0[3] = []; renderSearch_2(search, 2, 3); }
 }
 
 
-async function ifSearchOne(search) {
-    letterArray = [[[], []], [[], []], [[], []], [[], []], [[], []]];
+function renderSearch_1(search) {
 
-    for (let i = 0; i < pokeJson[0].length; i++) {
-        let currentPoke = pokeJson[1][i];
+    for (let i = 0; i < pokeArray[1].length; i++) {
+        let currentPoke = pokeArray[1][i];
 
-        if (pokeJson[1][i].toLowerCase().charAt(0).includes(search[0]) && search.length == 1) {
-            letterArray[0][0].push(i + 1);
-            letterArray[0][1].push(currentPoke);
+        if (currentPoke.toLowerCase().charAt(0).includes(search[0])) {
+            array0[0].push(currentPoke);
+        }
+    };
+    renderHtml(0);
+}
+
+
+function renderSearch_2(search, from, to) {
+
+    for (let i = 0; i < array0[from].length; i++) {
+        let currentPoke = array0[from][i];
+
+        if (letterFinish) {
+
+            if (currentPoke.toLowerCase().includes(search)) {
+                array0[to].push(currentPoke);
+            }
+
+        } else {
+
+            if (currentPoke.toLowerCase().charAt(to).includes(search[to])) {
+                array0[to].push(currentPoke);
+            }
+        }
+    };
+    renderHtml(to);
+}
+
+
+function renderHtml(pos) {
+    let list = document.getElementById('outputSearchPoke');
+
+    for (let i = 0; i < array0[pos].length; i++) {
+        const currentPoke = array0[pos][i];
+
+        idNew = pokeArray[1].indexOf(currentPoke);
+        nameNew = currentPoke;
+
+        loadAddZero(idNew + 1);
+
+        list.innerHTML += exportRenderHtml();
+    }
+}
+
+
+function exportRenderHtml() {
+    return `
+            <ul onclick="showPokoCard(${idNew})">
+                <a onclick="closeSearch()" class="color_g" href="#">${nameNew}</a>    
+                <a onclick="closeSearch()" class="color_g}" href="#">#${addZero}</a>
+            </ul>
+            `;
+}
+
+// ============== serach 2 ==============
+
+
+function newSearch2(search) {
+
+    let list = document.getElementById('outputSearchPoke');
+    list.innerHTML = '';
+
+    if (search.length > 0) {
+        pokeArray[1].forEach(element => {
+            let currentPoke = element.toLowerCase().includes(search);
+
+            if (currentPoke) {
+                idNew = pokeArray[1].indexOf(element);
+                nameNew = element;
+
+                loadAddZero(idNew + 1);
+                list.innerHTML += `
+                         <ul onclick="showPokoCard(${idNew})">
+                             <a onclick="closeSearch()" class="color_g" href="#">${nameNew}</a>    
+                             <a onclick="closeSearch()" class="color_g}" href="#">#${addZero}</a>
+                         </ul>
+                     `;
+
+            };
+        });
+    }
+    if (search.length <= 0) {
+        document.getElementById('outputSearchPoke').innerHTML = '';
+        document.getElementById('searchPoke').value = '';
+    }
+}
+
+// ============== serach 3 ==============
+
+function newSearch3(search) {
+
+    let list = document.getElementById('outputSearchPoke');
+    list.innerHTML = '';
+
+    for (let i = 0; i < pokeArray[0].length; i++) {
+        let currentPoke = pokeArray[1][i];
+
+        if (currentPoke.toLowerCase().includes(search) && search.length > 0) {
+            idNew = pokeArray[1].indexOf(currentPoke);
+            nameNew = currentPoke;
+
+            loadAddZero(idNew + 1);
+            list.innerHTML += `
+            <ul onclick="showPokoCard(${idNew})">
+                <a onclick="closeSearch()" class="color_g" href="#">${nameNew}</a>    
+                <a onclick="closeSearch()" class="color_g}" href="#">#${addZero}</a>
+            </ul>
+        `;
         }
 
         if (search.length < 0) {
@@ -54,65 +157,8 @@ async function ifSearchOne(search) {
             document.getElementById('searchPoke').value = '';
         }
     };
-
-    await outputRenderSearch(0, 0);
 }
 
-
-async function searchPokeLetter(search, letterPos, arrayGet, arrayPush) {
-
-    for (let i = 0; i < letterArray[arrayGet][1].length; i++) {
-        let currentPokeNumber = letterArray[arrayGet][0][i]
-        let currentPoke = letterArray[arrayGet][1][i];
-
-        if (letterFinish) {
-            if (letterArray[arrayGet][1][i].toLowerCase().includes(search)) {
-
-                letterArray[arrayPush][0] = [];
-                letterArray[arrayPush][1] = [];
-                letterArray[arrayPush][0].push(currentPokeNumber);
-                letterArray[arrayPush][1].push(currentPoke)
-            }
-        } else {
-            if (letterArray[arrayGet][1][i].toLowerCase().charAt(letterPos).includes(search[letterPos])) {
-
-                letterArray[arrayPush][0].push(currentPokeNumber);
-                letterArray[arrayPush][1].push(currentPoke)
-            }
-        }
-    }
-    await outputRenderSearch(arrayPush, 0);
-}
-
-
-let addZero = 0;
-
-async function outputRenderSearch(firstArray, secondArray) {
-    let list = document.getElementById('outputSearchPoke');
-    list.innerHTML = '';
-
-    for (let i = 0; i < letterArray[firstArray][secondArray].length; i++) {
-        let idNum = letterArray[firstArray][secondArray][i];
-        let idNumColor = pokeJson[0][idNum - 1];
-
-        loadAddZero(idNum);
-
-        list.innerHTML += renderOutputSearch(idNum, idNumColor, letterArray[firstArray][1][i]);
-    }
-
-    document.getElementById('searchPoke').disabled = false;
-    document.getElementById('searchPoke').focus(); XMLDocument
-}
-
-
-function renderOutputSearch(idNum, idNumColor, array) {
-    return `
-            <ul onclick="showPokoCard(${idNum - 1})">
-                <a onclick="closeSearch()" class="color_${idNumColor}" href="#">${array}</a>    
-                <a onclick="closeSearch()" class="color_${idNumColor}" href="#">#${addZero}</a>
-            </ul>
-        `;
-}
 
 
 function loadAddZero(idNum) {

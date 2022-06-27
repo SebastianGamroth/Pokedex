@@ -39,19 +39,24 @@ function arrowUp() {
 
 
 window.onscroll = function () {
-    let scrollY = Math.trunc(window.scrollY);
-
-    if (scrollY < 120) {
+    if (window.scrollY < 120) {
         document.getElementById('arrowUp').style.display = 'none';
     }
 
-    if (scrollY > 120) {
+    if (window.scrollY > 120) {
         document.getElementById('arrowUp').style.display = 'flex';;
     }
+}
 
-    // if (scrollY + window.innerHeight + 1 >= document.body.clientHeight) {
-    //     morePokeCards();
-    // }
+
+function moreByScroll() {
+    window.onscroll = function () {
+        let index = window.scrollY + window.innerHeight + 0.34;
+
+        if (index >= document.body.clientHeight) {
+            morePokeCards();
+        }
+    }
 }
 
 
